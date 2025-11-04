@@ -1,0 +1,359 @@
+[gd_scene load_steps=16 format=3 uid="uid://cc03a2d54eawg"]
+
+[ext_resource type="PackedScene" uid="uid://n5t1t45l273n" path="res://scenes/data_manager.tscn" id="1_lgwnu"]
+[ext_resource type="PackedScene" uid="uid://coxxmwsayyd7s" path="res://scenes/transition_screen.tscn" id="2_lgwnu"]
+[ext_resource type="Texture2D" uid="uid://bh2k6trfvr5xg" path="res://assets/img/dialogue_box.png" id="2_wu84c"]
+[ext_resource type="SystemFont" uid="uid://dy4i8g3aql6l7" path="res://assets/fonts/dialogue_box_normal.tres" id="3_8ln24"]
+[ext_resource type="Texture2D" uid="uid://c3jdqg3djktkf" path="res://assets/img/menu_background.png" id="3_flqon"]
+[ext_resource type="Script" uid="uid://sdp8gr8nf50s" path="res://scripts/selection_box.gd" id="3_rtw2f"]
+[ext_resource type="SystemFont" uid="uid://c01dtsgxpnrad" path="res://assets/fonts/dialogue_box_italicized.tres" id="4_rtw2f"]
+[ext_resource type="StyleBox" uid="uid://dbn4l4yi84h4a" path="res://assets/styles/main_menu_selected.tres" id="6_rtw2f"]
+[ext_resource type="Script" uid="uid://b4b36nleu8rr7" path="res://scripts/menu_buttons/new_game_label.gd" id="9_jk1qb"]
+[ext_resource type="Script" uid="uid://yl56274p5hlg" path="res://scripts/menu_buttons/load_game_label.gd" id="10_5dd4i"]
+[ext_resource type="Script" uid="uid://dhxx8g4b1m2iq" path="res://scripts/menu_buttons/credits_label.gd" id="12_flqon"]
+
+[sub_resource type="Animation" id="Animation_tbmy8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(220, 150)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Padding/VBoxContainer/NewGameLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Padding/VBoxContainer/LoadGameLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Padding/VBoxContainer/CreditsLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_oa1go"]
+resource_name = "open_selections"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 150), Vector2(220, 150)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Padding/VBoxContainer/NewGameLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Padding/VBoxContainer/LoadGameLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.01, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Padding/VBoxContainer/CreditsLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-0.01, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_lgwnu"]
+resource_name = "setup"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 150)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Padding/VBoxContainer/NewGameLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Padding/VBoxContainer/LoadGameLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Padding/VBoxContainer/CreditsLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jk1qb"]
+_data = {
+&"RESET": SubResource("Animation_tbmy8"),
+&"open_selections": SubResource("Animation_oa1go"),
+&"setup": SubResource("Animation_lgwnu")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DataManager" parent="." instance=ExtResource("1_lgwnu")]
+unique_name_in_owner = true
+
+[node name="TransitionScreen" parent="." instance=ExtResource("2_lgwnu")]
+layout_mode = 1
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.33333334
+anchor_top = -0.33333334
+anchor_right = 1.3333334
+anchor_bottom = 1.3333334
+offset_left = 384.0
+offset_top = 216.0
+offset_right = -384.0
+offset_bottom = -216.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_flqon")
+expand_mode = 3
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="SelectionBox" type="MarginContainer" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -172.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 110
+script = ExtResource("3_rtw2f")
+
+[node name="Background" type="NinePatchRect" parent="SelectionBox"]
+custom_minimum_size = Vector2(220, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+texture = ExtResource("2_wu84c")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SelectionBox/Background"]
+libraries = {
+&"": SubResource("AnimationLibrary_jk1qb")
+}
+
+[node name="Padding" type="MarginContainer" parent="SelectionBox/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SelectionBox/Background/Padding"]
+z_index = 1
+layout_mode = 2
+alignment = 1
+
+[node name="NewGameLabel" type="RichTextLabel" parent="SelectionBox/Background/Padding/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("3_8ln24")
+theme_override_fonts/italics_font = ExtResource("4_rtw2f")
+theme_override_font_sizes/normal_font_size = 21
+theme_override_styles/focus = ExtResource("6_rtw2f")
+text = "New Game"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("9_jk1qb")
+
+[node name="LoadGameLabel" type="RichTextLabel" parent="SelectionBox/Background/Padding/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_8ln24")
+theme_override_fonts/italics_font = ExtResource("4_rtw2f")
+theme_override_font_sizes/normal_font_size = 21
+theme_override_styles/focus = ExtResource("6_rtw2f")
+bbcode_enabled = true
+text = "Load Game"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("10_5dd4i")
+
+[node name="CreditsLabel" type="RichTextLabel" parent="SelectionBox/Background/Padding/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("3_8ln24")
+theme_override_fonts/italics_font = ExtResource("4_rtw2f")
+theme_override_font_sizes/normal_font_size = 21
+theme_override_styles/focus = ExtResource("6_rtw2f")
+text = "Credits"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("12_flqon")
+
+[node name="CreditsPane" type="NinePatchRect" parent="."]
+visible = false
+z_index = 3
+custom_minimum_size = Vector2(335, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -75.0
+offset_right = 110.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+texture = ExtResource("2_wu84c")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="Padding" type="MarginContainer" parent="CreditsPane"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="CreditsLabel" type="RichTextLabel" parent="CreditsPane/Padding"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("3_8ln24")
+theme_override_fonts/italics_font = ExtResource("4_rtw2f")
+theme_override_font_sizes/normal_font_size = 21
+theme_override_styles/focus = ExtResource("6_rtw2f")
+text = "Credits
+===========
+Luminescence
+(Team of 5)
+
+YGDA
+(Fall Game Jam Host)"
+fit_content = true
+horizontal_alignment = 1
+
+[connection signal="transition_ended" from="TransitionScreen" to="SelectionBox" method="_on_transition_screen_transition_ended"]
+[connection signal="transition_ended" from="TransitionScreen" to="SelectionBox/Background/Padding/VBoxContainer/NewGameLabel" method="_on_transition_screen_transition_ended"]
+[connection signal="animation_finished" from="SelectionBox/Background/AnimationPlayer" to="SelectionBox" method="_on_animation_player_animation_finished"]
+[connection signal="focus_exited" from="SelectionBox/Background/Padding/VBoxContainer/CreditsLabel" to="SelectionBox/Background/Padding/VBoxContainer/CreditsLabel" method="_on_focus_exited"]
