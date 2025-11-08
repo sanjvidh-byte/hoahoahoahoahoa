@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://lqwp6i4a5lqc"]
+
+[ext_resource type="Script" uid="uid://mao0o4ai0d3c" path="res://scripts/interactable_object.gd" id="1_gknyc"]
+[ext_resource type="Texture2D" uid="uid://dvkpfxbdjcci6" path="res://assets/img/interact_popup.png" id="2_1cvqn"]
+
+[node name="InteractableObject" type="StaticBody2D"]
+script = ExtResource("1_gknyc")
+
+[node name="InteractSprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_1cvqn")

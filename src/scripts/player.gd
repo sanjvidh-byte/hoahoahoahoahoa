@@ -1,11 +1,17 @@
+class_name Player
 extends CharacterBody2D
 
 @export var SPEED: float = 80.0
+var can_move := true
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var dialogue: Dialogue = %Dialogue
 
 
 func _physics_process(_delta: float) -> void:
+	if not can_move:
+		return
+	
 	# Get the horizontal direction
 	var horizontal := Input.get_axis("move_left", "move_right")
 	
@@ -34,7 +40,21 @@ func _physics_process(_delta: float) -> void:
 	else:
 		velocity.x = 0
 	
+	# Diagonal movement should be normalized
 	if velocity.x != 0 and velocity.y != 0:
 		velocity = velocity.normalized() * SPEED
 	
+	# Move the player
 	move_and_slide()
+
+
+func disable_movement() -> void:
+	can_move = false
+
+
+func enable_movement() -> void:
+	can_move = true
+
+
+func get_dialogue_node() -> Dialogue:
+	return dialogue

@@ -1,0 +1,6 @@
+[gd_resource type="SystemFont" format=3 uid="uid://dy4i8g3aql6l7"]
+
+[resource]
+font_names = PackedStringArray("Monospace")
+font_weight = 550
+subpixel_positioning = 0

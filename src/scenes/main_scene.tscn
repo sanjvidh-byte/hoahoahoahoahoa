@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=4 uid="uid://kpetl5ut10yo"]
+[gd_scene load_steps=12 format=4 uid="uid://kpetl5ut10yo"]
 
+[ext_resource type="PackedScene" uid="uid://n5t1t45l273n" path="res://scenes/data_manager.tscn" id="1_7ykc4"]
+[ext_resource type="PackedScene" uid="uid://dsyi0ewb6pf0q" path="res://scenes/dialogue.tscn" id="1_gubc5"]
 [ext_resource type="Texture2D" uid="uid://dtgst8ahegxt5" path="res://assets/img/tiles.png" id="1_w2twt"]
 [ext_resource type="PackedScene" uid="uid://bbkvicnx6hvx" path="res://scenes/player.tscn" id="2_pw63i"]
+[ext_resource type="Texture2D" uid="uid://b64tsxfcpyfkj" path="res://assets/img/icon.svg" id="3_7ykc4"]
+[ext_resource type="PackedScene" uid="uid://lqwp6i4a5lqc" path="res://scenes/interactable_object.tscn" id="4_pu3yx"]
+[ext_resource type="JSON" path="res://assets/dialogue/testing_dialogue.json" id="6_rt2n2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw63i"]
 resource_name = "Placeholder Tiles"
@@ -15,14 +20,53 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_pw63i")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gubc5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pu3yx"]
+size = Vector2(66, 42)
+
 [node name="Base" type="Node2D"]
+
+[node name="DataManager" parent="." instance=ExtResource("1_7ykc4")]
+unique_name_in_owner = true
 
 [node name="BackgroundTileLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAAAAAABAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAFAAAAAAABAAAAAAAFAAEAAAABAAAAAAAFAAIAAAABAAAAAAAFAAMAAAABAAAAAAAGAAAAAAABAAAAAAAGAAEAAAABAAAAAAAGAAIAAAABAAAAAAAGAAMAAAABAAAAAAAHAAAAAAABAAAAAAAHAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAMAAAABAAAAAAAIAAAAAAACAAAAAAAIAAEAAAACAAAAAAAIAAIAAAACAAAAAAAIAAMAAAACAAAAAAAJAAAAAAACAAAAAAAJAAEAAAACAAAAAAAJAAIAAAACAAAAAAAJAAMAAAACAAAAAAAKAAAAAAACAAAAAAAKAAEAAAACAAAAAAAKAAIAAAACAAAAAAAKAAMAAAACAAAAAAALAAAAAAACAAAAAAALAAEAAAACAAAAAAALAAIAAAACAAAAAAALAAMAAAACAAAAAAA=")
 tile_set = SubResource("TileSet_7ykc4")
 
 [node name="Player" parent="." instance=ExtResource("2_pw63i")]
+z_index = 2
 position = Vector2(14, 9)
+
+[node name="Dialogue" parent="Player" instance=ExtResource("1_gubc5")]
+unique_name_in_owner = true
+visible = false
+offset_left = -230.0
+offset_top = 129.0
+offset_right = 690.0
+offset_bottom = 129.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2.5, 2.5)
+
+[node name="InteractableObject" parent="." node_paths=PackedStringArray("interaction_area") instance=ExtResource("4_pu3yx")]
+position = Vector2(232, 88)
+dialogue_file = ExtResource("6_rt2n2")
+interaction_area = NodePath("Area2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObject"]
+position = Vector2(0, 16.499996)
+shape = SubResource("RectangleShape2D_gubc5")
+
+[node name="Sprite2D" type="Sprite2D" parent="InteractableObject"]
+position = Vector2(0, 17.5)
+scale = Vector2(0.1484375, 0.1328125)
+texture = ExtResource("3_7ykc4")
+
+[node name="Area2D" type="Area2D" parent="InteractableObject"]
+position = Vector2(0, 19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObject/Area2D"]
+shape = SubResource("RectangleShape2D_pu3yx")

@@ -1,0 +1,12 @@
+{
+	"contents": [
+		{
+			"TEXTURE": "icon.svg",
+			"NAME": "[color=#4386c2]Hello, World![/color]",
+			"DIALOGUE": "The [i]quick[/i] brown fox jumps over the [i]lazy[/i] dog."
+		},
+		{
+			"DIALOGUE": "Lorem ipsum dolor sit amet"
+		}
+	]
+}
