@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtgst8ahegxt5"
-path="res://.godot/imported/tiles.png-29850deb4e24667c25118f8f9197dff7.ctex"
+uid="uid://6wnuo4jk2bjl"
+path="res://.godot/imported/purplepos.png.webp-d537acc3749831222736636157499395.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/tiles.png"
-dest_files=["res://.godot/imported/tiles.png-29850deb4e24667c25118f8f9197dff7.ctex"]
+source_file="res://assets/img/purplepos.png.webp"
+dest_files=["res://.godot/imported/purplepos.png.webp-d537acc3749831222736636157499395.ctex"]
 
 [params]
 

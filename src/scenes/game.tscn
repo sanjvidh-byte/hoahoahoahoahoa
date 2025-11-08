@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://on71uouydfpp"]
+
+[ext_resource type="Script" uid="uid://7j48tkldkqxv" path="res://scripts/game.gd" id="1_80nbo"]
+[ext_resource type="Texture2D" uid="uid://dx3rkvipb60oi" path="res://assets/img/bluepos.png.webp" id="2_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://dh1tsme75bt1h" path="res://assets/img/pinkpos.png.webp" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://6wnuo4jk2bjl" path="res://assets/img/purplepos.png.webp" id="4_lbhrr"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_80nbo"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_80nbo")
+
+[node name="TimeLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Time: 30"
+
+[node name="TopPotions" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+
+[node name="potion5" type="Sprite2D" parent="TopPotions"]
+texture = SubResource("CompressedTexture2D_80nbo")
+
+[node name="potion4" type="Sprite2D" parent="TopPotions"]
+texture = SubResource("CompressedTexture2D_80nbo")
+
+[node name="potion3" type="Sprite2D" parent="TopPotions"]
+texture = SubResource("CompressedTexture2D_80nbo")
+
+[node name="potion2" type="Sprite2D" parent="TopPotions"]
+texture = SubResource("CompressedTexture2D_80nbo")
+
+[node name="potion1" type="Sprite2D" parent="TopPotions"]
+texture = SubResource("CompressedTexture2D_80nbo")
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+offset_left = 200.0
+offset_top = 500.0
+offset_right = 748.0
+offset_bottom = 656.0
+
+[node name="potion1button" type="Button" parent="Buttons"]
+layout_mode = 2
+icon = ExtResource("2_yqjtg")
+
+[node name="potion2button" type="Button" parent="Buttons"]
+layout_mode = 2
+icon = ExtResource("3_lnu2h")
+
+[node name="potion3button" type="Button" parent="Buttons"]
+layout_mode = 2
+icon = ExtResource("4_lbhrr")
+
+[connection signal="pressed" from="Buttons/potion1button" to="." method="_on_potion_1_button_pressed"]

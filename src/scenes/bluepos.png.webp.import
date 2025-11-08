@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtgst8ahegxt5"
-path="res://.godot/imported/tiles.png-29850deb4e24667c25118f8f9197dff7.ctex"
+uid="uid://b15n4mb25nycx"
+path="res://.godot/imported/bluepos.png.webp-b086919bf175f504caff243ca43da001.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/tiles.png"
-dest_files=["res://.godot/imported/tiles.png-29850deb4e24667c25118f8f9197dff7.ctex"]
+source_file="res://scenes/bluepos.png.webp"
+dest_files=["res://.godot/imported/bluepos.png.webp-b086919bf175f504caff243ca43da001.ctex"]
 
 [params]
 

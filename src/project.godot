@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="2025 Fall Game Jam"
-run/main_scene="uid://kpetl5ut10yo"
-config/features=PackedStringArray("4.5", "Forward Plus")
+run/main_scene="uid://on71uouydfpp"
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://assets/img/icon.svg"
 
 [input]
