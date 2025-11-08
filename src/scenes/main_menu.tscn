@@ -355,5 +355,6 @@ horizontal_alignment = 1
 
 [connection signal="transition_ended" from="TransitionScreen" to="SelectionBox" method="_on_transition_screen_transition_ended"]
 [connection signal="transition_ended" from="TransitionScreen" to="SelectionBox/Background/Padding/VBoxContainer/NewGameLabel" method="_on_transition_screen_transition_ended"]
+[connection signal="transition_ended" from="TransitionScreen" to="SelectionBox/Background/Padding/VBoxContainer/LoadGameLabel" method="_on_transition_screen_transition_ended"]
 [connection signal="animation_finished" from="SelectionBox/Background/AnimationPlayer" to="SelectionBox" method="_on_animation_player_animation_finished"]
 [connection signal="focus_exited" from="SelectionBox/Background/Padding/VBoxContainer/CreditsLabel" to="SelectionBox/Background/Padding/VBoxContainer/CreditsLabel" method="_on_focus_exited"]
