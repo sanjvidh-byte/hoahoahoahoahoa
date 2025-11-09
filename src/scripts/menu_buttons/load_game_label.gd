@@ -1,6 +1,8 @@
 extends RichTextLabel
 
 const MAIN_SCENE = preload("uid://kpetl5ut10yo")
+const FOREST_SCENE = preload("uid://doayh528xhbvm")
+const CAVE_SCENE = preload("uid://ck12hgxt02mc2")
 
 const UNAVAILABLE_COLOR := "#a0a0a0"
 
@@ -30,4 +32,24 @@ func button_press() -> void:
 
 func _on_transition_screen_transition_ended(animation_name: StringName) -> void:
 	if _started_interact and animation_name == TransitionScreen.FADE_IN_NAME:
-		get_tree().change_scene_to_packed(MAIN_SCENE)
+		var data := data_manager.load_data(DataKeys.TEMPLATE_DATA)
+		
+		if data.is_empty() or not DataKeys.MAP_POSITION_KEY in data:
+			# Default spawn location
+			get_tree().change_scene_to_packed(MAIN_SCENE)
+			return
+		
+		# Get the location value from the data
+		var location = data[DataKeys.MAP_POSITION_KEY]
+		
+		# Switch to the correct scene
+		match location:
+			DataKeys.HOUSE_VALUE:
+				get_tree().change_scene_to_packed(MAIN_SCENE)
+			DataKeys.FOREST_VALUE:
+				get_tree().change_scene_to_packed(FOREST_SCENE)
+			DataKeys.CAVE_VALUE:
+				get_tree().change_scene_to_packed(CAVE_SCENE)
+			_:
+				print("Invalid position found!")
+				get_tree().change_scene_to_packed(MAIN_SCENE)

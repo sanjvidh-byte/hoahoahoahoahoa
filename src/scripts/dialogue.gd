@@ -39,6 +39,9 @@ var _opened_interaction := false
 # Variable to hold whether the dialogue was skipped to the end
 var _skipped_dialogue := false
 
+# Variable to hold what the last checked dialogue was
+var _last_checked_dialogue: int
+
 # Variable to hold what the currently showing dialogue is
 var _current_dialogue_index: int
 
@@ -71,6 +74,7 @@ func _input(event: InputEvent) -> void:
 		_end_of_dialogue_animation_player.stop()
 		_end_of_dialogue_animation_player.play("RESET")
 		
+		_skipped_dialogue = false
 		_move_to_next_dialogue()
 	else:
 		# TODO: (Feature) Add an action for "speeding up" dialogue text
@@ -78,10 +82,8 @@ func _input(event: InputEvent) -> void:
 		_current_tween.kill()
 		_dialogue_text_label.visible_ratio = 1.0
 		
+		_skipped_dialogue = true
 		_between_dialogue_action()
-	
-	# Flip the variable
-	_skipped_dialogue = not _skipped_dialogue
 
 
 ## Set the speaker's texture using a [Texture2D]
@@ -107,7 +109,6 @@ func change_dialogue_text(new_text: String) -> void:
 ## To set the speaker's text, add a [String] under [member dialogue_key].
 func add_next_dialogue(lines: Array[Dictionary]) -> void:
 	_next_dialogue = lines
-	print(_next_dialogue)
 
 
 func show_dialogue() -> void:
@@ -135,11 +136,16 @@ func _move_to_next_dialogue() -> void:
 	
 	# NOTE: null can be used to clear a texture
 	if texture_key in line:
-		# Load the image
-		var new_texture := load(BASE_FILEPATH + line[texture_key])
+		var texture = line[texture_key]
+		var new_texture
 		
-		if new_texture != null:
-			_speaker_texture.texture = new_texture
+		if texture == null:
+			new_texture = null
+		else:
+			# Load the image
+			new_texture = load(BASE_FILEPATH + texture)
+		
+		_speaker_texture.texture = new_texture
 	
 	if name_key in line:
 		_speaker_name_label.text = line[name_key]
@@ -158,14 +164,18 @@ func _move_to_next_dialogue() -> void:
 
 
 func _between_dialogue_action() -> void:
+	# This allows the waiting time to be skipped
+	_skipped_dialogue = true
+	
 	# Set what the current dialogue is
-	var _last_checked_dialogue := _current_dialogue_index
+	_last_checked_dialogue = _current_dialogue_index
 	
+	# Start playing the "next dialogue" animation
 	_end_of_dialogue_animation_player.play("indicator")
-	
 	_auto_play_timer.start()
-	await _auto_play_timer.timeout
-	
+
+
+func _on_auto_play_timer_timeout() -> void:
 	# Once the timer is done, check if the dialogue has already progressed
 	if _last_checked_dialogue == _current_dialogue_index:
 		_end_of_dialogue_animation_player.stop()
