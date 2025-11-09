@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cc03a2d54eawg"]
+[gd_scene load_steps=17 format=3 uid="uid://cc03a2d54eawg"]
 
 [ext_resource type="PackedScene" uid="uid://n5t1t45l273n" path="res://scenes/data_manager.tscn" id="1_lgwnu"]
 [ext_resource type="PackedScene" uid="uid://coxxmwsayyd7s" path="res://scenes/transition_screen.tscn" id="2_lgwnu"]
 [ext_resource type="Texture2D" uid="uid://bh2k6trfvr5xg" path="res://assets/img/dialogue_box.png" id="2_wu84c"]
 [ext_resource type="SystemFont" uid="uid://dy4i8g3aql6l7" path="res://assets/fonts/dialogue_box_normal.tres" id="3_8ln24"]
 [ext_resource type="Texture2D" uid="uid://c3jdqg3djktkf" path="res://assets/img/menu_background.png" id="3_flqon"]
+[ext_resource type="AudioStream" uid="uid://b7xa50mhhxqq0" path="res://assets/audio/bgm/transition_audio1.ogg" id="3_rcqid"]
 [ext_resource type="Script" uid="uid://sdp8gr8nf50s" path="res://scripts/selection_box.gd" id="3_rtw2f"]
 [ext_resource type="SystemFont" uid="uid://c01dtsgxpnrad" path="res://assets/fonts/dialogue_box_italicized.tres" id="4_rtw2f"]
 [ext_resource type="StyleBox" uid="uid://dbn4l4yi84h4a" path="res://assets/styles/main_menu_selected.tres" id="6_rtw2f"]
@@ -187,6 +188,10 @@ unique_name_in_owner = true
 
 [node name="TransitionScreen" parent="." instance=ExtResource("2_lgwnu")]
 layout_mode = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rcqid")
+autoplay = true
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1

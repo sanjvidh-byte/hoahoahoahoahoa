@@ -1,0 +1,34 @@
+{
+	"contents": [
+		{
+			"TEXTURE": "icon.svg",
+			"NAME": "[color=#4386c2]Akimi[/color]",
+			"DIALOGUE": "What a long night...\nI'm so tired."
+		},
+		{
+			"DIALOGUE": "*OPENS PHONE*"
+		},
+		{
+			"TEXTURE": null,
+			"NAME": "[color=#ebebeb]Phone Screen[/color]",
+			"DIALOGUE": "*MIKU CONCERT - Tickets for the next Miku concert on 3/9 are now available for purchase!*"
+		},
+		{
+			"TEXTURE": "icon.svg",
+			"NAME": "[color=#4386c2]Akimi[/color]",
+			"DIALOGUE": "Miku!"
+		},
+		{
+			"DIALOGUE": ".... Oh. It's $(number withheld)."
+		},
+		{
+			"DIALOGUE": "How am I going to make that much money if I don't have a j*b?"
+		},
+		{
+			"DIALOGUE": "*CHECKS JOB LISTINGS*"
+		},
+		{
+			"DIALOGUE": "Ugh, all of these sound awful. If only I could be a magical girl or something instead of these boring 9 to 5 j*bs...."
+		}
+	]
+}
