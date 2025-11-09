@@ -1,13 +1,17 @@
-[gd_scene load_steps=17 format=4 uid="uid://kpetl5ut10yo"]
+[gd_scene load_steps=27 format=4 uid="uid://kpetl5ut10yo"]
 
+[ext_resource type="Script" uid="uid://c8kunymqafu6p" path="res://scripts/intro_cutscene.gd" id="1_6wevv"]
 [ext_resource type="PackedScene" uid="uid://n5t1t45l273n" path="res://scenes/data_manager.tscn" id="1_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://dsyi0ewb6pf0q" path="res://scenes/dialogue.tscn" id="1_gubc5"]
 [ext_resource type="Texture2D" uid="uid://dtgst8ahegxt5" path="res://assets/img/tiles.png" id="1_w2twt"]
 [ext_resource type="PackedScene" uid="uid://bbkvicnx6hvx" path="res://scenes/player.tscn" id="2_pw63i"]
 [ext_resource type="Texture2D" uid="uid://b64tsxfcpyfkj" path="res://assets/img/icon.svg" id="3_7ykc4"]
 [ext_resource type="Script" uid="uid://b7c0642t3cu" path="res://scripts/spawn_locations.gd" id="3_18nlu"]
+[ext_resource type="Texture2D" uid="uid://cxgn0ktfsadfa" path="res://assets/img/furniture_tilesheet.png" id="3_c1pb6"]
+[ext_resource type="PackedScene" uid="uid://coxxmwsayyd7s" path="res://scenes/transition_screen.tscn" id="3_e1cbu"]
+[ext_resource type="AudioStream" uid="uid://be0nuvxfjy7eq" path="res://assets/audio/bgm/bg_1.ogg" id="3_mngbo"]
 [ext_resource type="PackedScene" uid="uid://lqwp6i4a5lqc" path="res://scenes/interactable_object.tscn" id="4_pu3yx"]
-[ext_resource type="JSON" path="res://assets/dialogue/testing_dialogue.json" id="6_rt2n2"]
+[ext_resource type="JSON" path="res://assets/dialogue/intro_dialogue.json" id="7_18nlu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw63i"]
 resource_name = "Tiles"
@@ -45,6 +49,27 @@ texture_region_size = Vector2i(50, 50)
 tile_size = Vector2i(50, 50)
 sources/0 = SubResource("TileSetAtlasSource_pw63i")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c1pb6"]
+texture = ExtResource("3_c1pb6")
+texture_region_size = Vector2i(20, 20)
+0:0/size_in_atlas = Vector2i(1, 5)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/size_in_atlas = Vector2i(2, 2)
+6:0/0 = 0
+8:0/size_in_atlas = Vector2i(4, 5)
+8:0/0 = 0
+2:2/size_in_atlas = Vector2i(5, 5)
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_e1cbu"]
+tile_size = Vector2i(10, 10)
+sources/1 = SubResource("TileSetAtlasSource_c1pb6")
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_18nlu"]
 normal = Vector2(1, 0)
 
@@ -56,12 +81,37 @@ normal = Vector2(0, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e1cbu"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1pb6"]
+size = Vector2(62, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wevv"]
+size = Vector2(20, 94)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1cbu"]
+size = Vector2(27, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mngbo"]
+size = Vector2(14, 13)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gubc5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pu3yx"]
 size = Vector2(66, 42)
 
 [node name="Base" type="Node2D"]
+script = ExtResource("1_6wevv")
+cutscene_dialogue = ExtResource("7_18nlu")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_mngbo")
+autoplay = true
+
+[node name="TransitionScreen" parent="." instance=ExtResource("3_e1cbu")]
+z_index = 7
+offset_left = -387.0
+offset_top = -204.0
+offset_right = 765.0
+offset_bottom = 444.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -71,10 +121,10 @@ follow_viewport_enabled = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -450.0
-offset_top = -200.0
-offset_right = -450.0
-offset_bottom = -200.0
+offset_left = -387.0
+offset_top = -204.0
+offset_right = -387.0
+offset_bottom = -204.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
@@ -84,44 +134,89 @@ unique_name_in_owner = true
 
 [node name="BackgroundTileLayer" type="TileMapLayer" parent="."]
 z_index = 1
-tile_map_data = PackedByteArray("AAAAAAAAAAADAAAAAAAAAAEAAAADAAEAAAAAAAIAAAADAAEAAAAAAAMAAAADAAEAAAABAAAAAAAEAAAAAAABAAEAAAAEAAEAAAABAAIAAAAEAAEAAAABAAMAAAAEAAEAAAACAAAAAAAEAAAAAAACAAEAAAAEAAEAAAACAAIAAAAEAAEAAAACAAMAAAAEAAEAAAADAAAAAAAEAAAAAAADAAEAAAAEAAEAAAADAAIAAAAEAAEAAAADAAMAAAAEAAEAAAAEAAAAAAAFAAAAAAAEAAQAAAAFAAIAAAAAAAQAAAADAAIAAAABAAQAAAAEAAIAAAACAAQAAAAEAAIAAAADAAQAAAAEAAIAAAAEAAEAAAAFAAEAAAAEAAIAAAAFAAEAAAAEAAMAAAAFAAEAAAA=")
+tile_map_data = PackedByteArray("AAADAAAAAAAEAAAAAAADAAEAAAAEAAEAAAADAAIAAAAEAAEAAAAEAAAAAAAFAAAAAAAEAAEAAAAFAAEAAAAEAAIAAAAFAAEAAAADAAMAAAAEAAIAAAAEAAMAAAAFAAIAAAACAAAAAAADAAAAAAACAAEAAAADAAEAAAACAAIAAAADAAEAAAACAAMAAAADAAIAAAA=")
 tile_set = SubResource("TileSet_7ykc4")
+
+[node name="FloorLayer" type="TileMapLayer" parent="."]
+z_index = 2
+tile_map_data = PackedByteArray("AAASAAUAAQAIAAAAAAAXAAYAAQAAAAAAAAAPAAoAAQACAAIAAAA=")
+tile_set = SubResource("TileSet_e1cbu")
+
+[node name="FurnitureLayer" type="TileMapLayer" parent="."]
+z_index = 2
+tile_map_data = PackedByteArray("AAASAAUAAQAIAAAAAAAVAAwAAQACAAAAAAANAAMAAQAGAAAAAAA=")
+tile_set = SubResource("TileSet_e1cbu")
+
+[node name="TopFurnitureLayer" type="TileMapLayer" parent="."]
+z_index = 2
+tile_map_data = PackedByteArray("AAASAAUAAQAIAAAAAAAVAAwAAQACAAAAAAANAAMAAQABAAAAAAAXAAYAAQADAAAAAAAXAAQAAQAEAAAAAAAXAAMAAQAFAAAAAAA=")
+tile_set = SubResource("TileSet_e1cbu")
 
 [node name="Walls" type="Node" parent="."]
 
 [node name="LeftWall" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
-position = Vector2(0, 125)
+position = Vector2(100, 100)
 shape = SubResource("WorldBoundaryShape2D_18nlu")
 
 [node name="RightWall" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
-position = Vector2(250, 125)
+position = Vector2(250, 100)
 shape = SubResource("WorldBoundaryShape2D_c1pb6")
 
 [node name="TopWall" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
-position = Vector2(125, 0)
+position = Vector2(175, 0)
 shape = SubResource("WorldBoundaryShape2D_6wevv")
 
 [node name="BottomWall" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
-position = Vector2(125, 250)
+position = Vector2(175, 200)
 shape = SubResource("WorldBoundaryShape2D_e1cbu")
+
+[node name="Collisions" type="Node" parent="."]
+
+[node name="Bed" type="StaticBody2D" parent="Collisions"]
+z_index = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Bed"]
+position = Vector2(185, 55)
+shape = SubResource("RectangleShape2D_c1pb6")
+
+[node name="Drawer" type="StaticBody2D" parent="Collisions"]
+z_index = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Drawer"]
+position = Vector2(235, 65)
+shape = SubResource("RectangleShape2D_6wevv")
+
+[node name="SideDesk" type="StaticBody2D" parent="Collisions"]
+z_index = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/SideDesk"]
+position = Vector2(134.5, 34.5)
+shape = SubResource("RectangleShape2D_e1cbu")
+
+[node name="FloorPlant" type="StaticBody2D" parent="Collisions"]
+z_index = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/FloorPlant"]
+position = Vector2(215, 124.5)
+shape = SubResource("RectangleShape2D_mngbo")
 
 [node name="SpawnLocations" type="Node" parent="." node_paths=PackedStringArray("spawn_location")]
 script = ExtResource("3_18nlu")
 spawn_location = NodePath("House")
 
 [node name="House" type="Node2D" parent="SpawnLocations"]
-position = Vector2(156, 54)
+position = Vector2(148, 69)
 
 [node name="Player" parent="." instance=ExtResource("2_pw63i")]
-z_index = 3
+z_index = 5
 position = Vector2(14, 9)
 
 [node name="Dialogue" parent="Player" instance=ExtResource("1_gubc5")]
@@ -138,9 +233,9 @@ size_flags_horizontal = 3
 zoom = Vector2(2.5, 2.5)
 
 [node name="InteractableObject" parent="." node_paths=PackedStringArray("interaction_area") instance=ExtResource("4_pu3yx")]
-z_index = 2
-position = Vector2(232, 88)
-dialogue_file = ExtResource("6_rt2n2")
+z_index = 3
+position = Vector2(166, 122)
+dialogue_file = ExtResource("7_18nlu")
 interaction_area = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObject"]
