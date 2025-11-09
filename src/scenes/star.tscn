@@ -1,20 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://chpkb0v4ng5id"]
 
 [ext_resource type="Script" uid="uid://y7if2wkkncq8" path="res://scripts/star.gd" id="1_j6vao"]
-[ext_resource type="Texture2D" uid="uid://cpus3nh1m5dkw" path="res://assets/enemy1.png" id="1_mcqwg"]
+[ext_resource type="Texture2D" uid="uid://c6n3x73beorph" path="res://assets/img/falling_star.png" id="2_j6vao"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
-size = Vector2(83, 77)
+size = Vector2(65, 59)
 
 [node name="RigidBody2D" type="RigidBody2D" groups=["stars"]]
 gravity_scale = 0.8
 script = ExtResource("1_j6vao")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(31.5, 21.5)
+position = Vector2(31.5, 23.5)
 shape = SubResource("RectangleShape2D_272bh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(32, 36.5)
-scale = Vector2(3, 3.28125)
-texture = ExtResource("1_mcqwg")
+position = Vector2(31.250002, 21.653511)
+scale = Vector2(1.0986843, 0.9705045)
+texture = ExtResource("2_j6vao")

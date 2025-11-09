@@ -5,7 +5,6 @@ extends CharacterBody2D
 var can_move := true
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var dialogue: Dialogue = %Dialogue
 
 
 func _physics_process(_delta: float) -> void:
@@ -54,7 +53,3 @@ func disable_movement() -> void:
 
 func enable_movement() -> void:
 	can_move = true
-
-
-func get_dialogue_node() -> Dialogue:
-	return dialogue
