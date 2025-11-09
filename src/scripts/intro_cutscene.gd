@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var cutscene_dialogue: JSON
-@export var start_delay: int = 2
+@export var start_delay: int = 1
 
 @onready var player: Player = $Player
 @onready var dialogue: Dialogue = %Dialogue
@@ -40,7 +40,14 @@ func _ready() -> void:
 		
 		dialogue_dictionary.append(converted)
 	
+	# Queue the dialogue and then wait until the fade out finishes
 	dialogue.add_next_dialogue(dialogue_dictionary)
+
+
+func _on_transition_screen_transition_ended(animation_name: StringName) -> void:
+	if animation_name != TransitionScreen.FADE_OUT_NAME:
+		return
+	
 	await get_tree().create_timer(start_delay).timeout
 	
 	dialogue.show_dialogue()

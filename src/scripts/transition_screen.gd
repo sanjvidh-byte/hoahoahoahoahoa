@@ -9,7 +9,6 @@ const FADE_OUT_NAME := "fade_out"
 @export var fade_out_on_ready := true
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var selection_box: SelectionBox = $"../SelectionBox"
 
 
 func _ready() -> void:
