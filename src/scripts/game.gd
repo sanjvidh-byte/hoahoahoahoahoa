@@ -3,6 +3,7 @@ extends Node2D
 @onready var timerText = $TimeLabel
 @onready var topRow = $TopPotions
 @onready var potionButtons = $Buttons
+@onready var music = $MusicPlayer
 
 var potionNames = ["bluePotion", "pinkPotion", "purplePotion"]
 var potionPics = {
@@ -12,7 +13,7 @@ var potionPics = {
 }
 
 var recipeOrder = []
-var secondsLeft = 20.0
+var secondsLeft = 60.0
 var isPlaying = false
 var recipeCard
 var recipeTitle
@@ -20,7 +21,7 @@ var recipeTitle
 var retryButton
 
 var roundCount = 0
-var totalRounds = 5
+var totalRounds = 10
 
 func _ready():
 	var bg = Sprite2D.new()
@@ -36,6 +37,11 @@ func _ready():
 	makeRetryButton()
 	startGameNow()
 	set_process(true)
+	
+	music.stream = preload("res://assets/potionsss.ogg")
+	music.play()
+	music.volume_db = -5
+	music.stream.loop = true
 
 func _process(t):
 	runGameLoop(t)
@@ -99,10 +105,10 @@ func makeRetryButton():
 	retryButton.pressed.connect(onRetryClicked)
 
 func startGameNow():
-	secondsLeft = 20.0
+	secondsLeft = 60.0
 	roundCount = 0
 	isPlaying = true
-	timerText.text = "Time Left: 20s"
+	timerText.text = "Time Left: 60s"
 	makePotionOrder()
 	showRecipePotions()
 	showPotionButtons()
@@ -139,6 +145,7 @@ func showPotionButtons():
 		var btn = potionButtons.get_child(i)
 		var potionType = potionNames[i]
 		var pic = potionPics[potionType]
+		
 		if btn is TextureButton:
 			btn.normal_texture = pic
 			btn.hover_texture = pic
@@ -160,6 +167,7 @@ func onPotionClicked(i):
 			showRecipePotions()
 		else:
 			endTheGame(true)
+
 
 func endTheGame(win):
 	isPlaying = false
