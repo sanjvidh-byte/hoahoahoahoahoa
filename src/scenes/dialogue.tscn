@@ -157,3 +157,5 @@ visible_ratio = 0.0
 libraries = {
 &"": SubResource("AnimationLibrary_x1cjp")
 }
+
+[connection signal="timeout" from="DialogueBox/Background/InnerMargins/VBoxContainer/DialogueTextLabel/AutoPlayTimer" to="." method="_on_auto_play_timer_timeout"]

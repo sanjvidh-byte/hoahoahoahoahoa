@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=4 uid="uid://chndrcxl56m26"]
+
+[ext_resource type="Script" uid="uid://bdxjiuabgbca4" path="res://scripts/minigame2.gd" id="1_y0rby"]
+[ext_resource type="Texture2D" uid="uid://dtgst8ahegxt5" path="res://assets/img/tiles.png" id="2_lhedx"]
+[ext_resource type="PackedScene" uid="uid://chpkb0v4ng5id" path="res://scenes/star.tscn" id="3_jk64j"]
+[ext_resource type="PackedScene" uid="uid://baevpgk7qx4at" path="res://scenes/player_minigame2.tscn" id="4_y0rby"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jk64j"]
+texture = ExtResource("2_lhedx")
+4:0/size_in_atlas = Vector2i(2, 2)
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_272bh"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_jk64j")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_y0rby")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAAAAAQAAQAEAAAAAAAAAAUAAQAEAAAAAAAAAAYAAQAEAAAAAAAAAAcAAQAEAAAAAAABAAQAAQAEAAAAAAABAAUAAQAEAAAAAAABAAYAAQAEAAAAAAABAAcAAQAEAAAAAAACAAQAAQAEAAAAAAACAAUAAQAEAAAAAAACAAYAAQAEAAAAAAACAAcAAQAEAAAAAAADAAQAAQAEAAAAAAADAAUAAQAEAAAAAAADAAYAAQAEAAAAAAADAAcAAQAEAAAAAAAEAAQAAQAEAAAAAAAEAAUAAQAEAAAAAAAEAAYAAQAEAAAAAAAEAAcAAQAEAAAAAAAFAAQAAQAEAAAAAAAFAAUAAQAEAAAAAAAFAAYAAQAEAAAAAAAFAAcAAQAEAAAAAAAGAAQAAQAEAAAAAAAGAAUAAQAEAAAAAAAGAAYAAQAEAAAAAAAGAAcAAQAEAAAAAAAHAAQAAQAEAAAAAAAHAAUAAQAEAAAAAAAHAAYAAQAEAAAAAAAHAAcAAQAEAAAAAAAIAAQAAQAEAAAAAAAIAAUAAQAEAAAAAAAIAAYAAQAEAAAAAAAIAAcAAQAEAAAAAAAJAAQAAQAEAAAAAAAJAAUAAQAEAAAAAAAJAAYAAQAEAAAAAAAJAAcAAQAEAAAAAAAAAAgAAQAEAAAAAAABAAgAAQAEAAAAAAACAAgAAQAEAAAAAAADAAgAAQAEAAAAAAAEAAgAAQAEAAAAAAAFAAgAAQAEAAAAAAAGAAgAAQAEAAAAAAAHAAgAAQAEAAAAAAAIAAgAAQAEAAAAAAAJAAgAAQAEAAAAAAA=")
+tile_set = SubResource("TileSet_272bh")
+
+[node name="RigidBody2D" parent="." instance=ExtResource("3_jk64j")]
+position = Vector2(151, 136)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Marker2D6" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(20, 20)
+
+[node name="Marker2D7" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(122, 20)
+
+[node name="Marker2D8" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(255, 24)
+
+[node name="Marker2D9" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(386, 26)
+
+[node name="Marker2D10" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(482, 25)
+
+[node name="Marker2D16" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(576, 23)
+
+[node name="Marker2D11" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(668, 22)
+
+[node name="Marker2D12" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(763, 22)
+
+[node name="Marker2D13" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(905, 23)
+
+[node name="Marker2D14" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1024, 23)
+
+[node name="Marker2D15" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1130, 21)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 21.0
+one_shot = true
+autostart = true
+
+[node name="TimerLabel" type="Label" parent="."]
+offset_left = 26.0
+offset_top = 537.0
+offset_right = 204.0
+offset_bottom = 613.0
+theme_override_font_sizes/font_size = 25
+
+[node name="Player" parent="." instance=ExtResource("4_y0rby")]
+position = Vector2(426.00003, 465)
+scale = Vector2(3, 3)
+SPEED = 300.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,189 @@
+[gd_scene load_steps=21 format=4 uid="uid://ck12hgxt02mc2"]
+
+[ext_resource type="PackedScene" uid="uid://n5t1t45l273n" path="res://scenes/data_manager.tscn" id="1_nnjfw"]
+[ext_resource type="AudioStream" uid="uid://be0nuvxfjy7eq" path="res://assets/audio/bgm/bg_1.ogg" id="1_w3ser"]
+[ext_resource type="Texture2D" uid="uid://dtgst8ahegxt5" path="res://assets/img/tiles.png" id="2_w3ser"]
+[ext_resource type="Script" uid="uid://b7c0642t3cu" path="res://scripts/spawn_locations.gd" id="3_lui1t"]
+[ext_resource type="PackedScene" uid="uid://bbkvicnx6hvx" path="res://scenes/player.tscn" id="4_6fm3r"]
+[ext_resource type="Texture2D" uid="uid://f6dp30swj5ub" path="res://assets/img/crystal_tilesheet.png" id="4_lui1t"]
+[ext_resource type="PackedScene" uid="uid://dsyi0ewb6pf0q" path="res://scenes/dialogue.tscn" id="5_jiuq5"]
+[ext_resource type="PackedScene" uid="uid://lqwp6i4a5lqc" path="res://scenes/interactable_object.tscn" id="6_u6cyb"]
+[ext_resource type="JSON" path="res://assets/dialogue/testing_dialogue.json" id="7_lxwcu"]
+[ext_resource type="Texture2D" uid="uid://b64tsxfcpyfkj" path="res://assets/img/icon.svg" id="8_f5qid"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw63i"]
+resource_name = "Tiles"
+texture = ExtResource("2_w3ser")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+3:1/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_7ykc4"]
+tile_size = Vector2i(50, 50)
+sources/0 = SubResource("TileSetAtlasSource_pw63i")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6fm3r"]
+texture = ExtResource("4_lui1t")
+texture_region_size = Vector2i(10, 10)
+0:0/size_in_atlas = Vector2i(4, 5)
+0:0/0 = 0
+0:5/size_in_atlas = Vector2i(4, 5)
+0:5/0 = 0
+0:10/size_in_atlas = Vector2i(4, 5)
+0:10/0 = 0
+4:0/size_in_atlas = Vector2i(1, 3)
+4:0/0 = 0
+5:0/size_in_atlas = Vector2i(1, 3)
+5:0/0 = 0
+6:0/size_in_atlas = Vector2i(1, 3)
+6:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jiuq5"]
+sources/0 = SubResource("TileSetAtlasSource_6fm3r")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_18nlu"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c1pb6"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6wevv"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e1cbu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gubc5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pu3yx"]
+size = Vector2(66, 42)
+
+[node name="Base" type="Node2D"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_w3ser")
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -506.0
+offset_top = -179.0
+offset_right = 14.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DataManager" parent="." instance=ExtResource("1_nnjfw")]
+unique_name_in_owner = true
+
+[node name="BackgroundTileLayer" type="TileMapLayer" parent="."]
+z_index = 1
+tile_map_data = PackedByteArray("AAAAAAEAAAAGAAEAAAAAAAIAAAAGAAEAAAAAAAMAAAAGAAEAAAABAAEAAAAHAAEAAAABAAIAAAAHAAEAAAABAAMAAAAHAAEAAAACAAEAAAAHAAEAAAACAAIAAAAHAAEAAAACAAMAAAAHAAEAAAADAAAAAAAHAAAAAAADAAEAAAAHAAEAAAADAAIAAAAHAAEAAAADAAMAAAAHAAEAAAAEAAAAAAAHAAAAAAAEAAQAAAAHAAAAAAAAAAQAAAAGAAEAAAABAAQAAAAHAAEAAAACAAQAAAAGAAAAAAADAAQAAAAHAAAAAAAEAAEAAAAHAAEAAAAEAAIAAAAHAAEAAAAEAAMAAAAHAAEAAAAAAAAAAAAGAAAAAAABAAAAAAAHAAAAAAACAAAAAAAHAAAAAAAFAAMAAAAHAAEAAAAFAAIAAAAHAAEAAAAGAAIAAAAHAAEAAAAIAAEAAAAHAAEAAAAJAAEAAAAHAAEAAAALAAMAAAAHAAEAAAAMAAQAAAAIAAEAAAAIAAcAAAAIAAEAAAALAAcAAAAHAAEAAAAFAAcAAAAIAAIAAAAFAAgAAAAHAAEAAAAMAAkAAAAIAAEAAAADAAYAAAAHAAEAAAAGAAYAAAAHAAIAAAAFAAYAAAAHAAEAAAAFAAUAAAAHAAEAAAAGAAUAAAAHAAAAAAAHAAUAAAAHAAAAAAAIAAUAAAAIAAAAAAALAAYAAAAHAAEAAAAIAAIAAAAHAAEAAAAHAAIAAAAHAAEAAAAIAAMAAAAHAAEAAAAKAAEAAAAHAAEAAAALAAAAAAAHAAAAAAAAAAYAAAAGAAEAAAAAAAcAAAAGAAEAAAABAAgAAAAHAAEAAAACAAgAAAAHAAEAAAAGAAQAAAAHAAEAAAAHAAQAAAAHAAEAAAAIAAQAAAAHAAEAAAAFAAAAAAAHAAAAAAAGAAAAAAAHAAAAAAAHAAAAAAAHAAAAAAAJAAQAAAAHAAEAAAAJAAUAAAAHAAEAAAAKAAUAAAAHAAEAAAAKAAYAAAAHAAEAAAAJAAgAAAAHAAEAAAAHAAgAAAAGAAEAAAABAAYAAAAHAAEAAAABAAcAAAAHAAEAAAACAAcAAAAGAAIAAAAAAAgAAAAGAAEAAAAAAAkAAAAGAAEAAAALAAgAAAAHAAEAAAAMAAgAAAAIAAEAAAAMAAYAAAAIAAEAAAAKAAMAAAAHAAEAAAAKAAQAAAAHAAEAAAALAAQAAAAHAAEAAAAMAAcAAAAIAAEAAAALAAUAAAAHAAEAAAAMAAUAAAAIAAEAAAAJAAMAAAAHAAEAAAAJAAIAAAAHAAEAAAAKAAIAAAAHAAEAAAAMAAEAAAAIAAEAAAAMAAIAAAAIAAEAAAAJAAcAAAAHAAEAAAAIAAgAAAAIAAEAAAAIAAYAAAAIAAEAAAAJAAYAAAAHAAEAAAAHAAYAAAAHAAEAAAAHAAcAAAAGAAEAAAAGAAcAAAAHAAEAAAAGAAgAAAAHAAEAAAABAAUAAAAHAAEAAAACAAUAAAAHAAEAAAAAAAUAAAAGAAEAAAACAAYAAAAGAAEAAAADAAUAAAAHAAEAAAAEAAUAAAAHAAEAAAAEAAYAAAAHAAEAAAAEAAcAAAAHAAIAAAAEAAgAAAAHAAEAAAAKAAcAAAAHAAEAAAAKAAgAAAAHAAEAAAAGAAEAAAAHAAEAAAAHAAEAAAAHAAEAAAAFAAQAAAAIAAAAAAAGAAMAAAAHAAEAAAAHAAMAAAAHAAEAAAAFAAEAAAAHAAEAAAALAAEAAAAHAAEAAAALAAIAAAAHAAEAAAAMAAMAAAAIAAEAAAADAAgAAAAHAAEAAAADAAcAAAAHAAIAAAAIAAAAAAAHAAAAAAAJAAAAAAAHAAAAAAAKAAAAAAAHAAAAAAAMAAAAAAAHAAAAAAAAAAoAAAAGAAEAAAAAAAsAAAAGAAEAAAAAAAwAAAAGAAEAAAAAAA0AAAAGAAEAAAAAAA4AAAAGAAEAAAAMAAoAAAAIAAEAAAAMAAsAAAAIAAEAAAAMAAwAAAAIAAEAAAAMAA0AAAAIAAEAAAAMAA4AAAAIAAEAAAAMAA8AAAAIAAIAAAAAAA8AAAAGAAIAAAABAA8AAAAHAAIAAAACAA8AAAAHAAIAAAADAA8AAAAHAAIAAAAEAA8AAAAHAAIAAAAFAA8AAAAHAAIAAAAGAA8AAAAHAAIAAAAHAA8AAAAHAAIAAAAIAA8AAAAHAAIAAAAJAA8AAAAHAAIAAAAKAA8AAAAHAAIAAAALAA8AAAAHAAIAAAABAAoAAAAHAAEAAAABAAsAAAAHAAEAAAABAAwAAAAHAAEAAAABAA0AAAAGAAAAAAABAA4AAAAGAAIAAAACAAoAAAAHAAEAAAACAAsAAAAHAAEAAAACAAwAAAAHAAEAAAACAA0AAAAHAAAAAAACAA4AAAAHAAIAAAADAAoAAAAHAAEAAAADAAsAAAAHAAEAAAADAAwAAAAHAAEAAAADAA0AAAAIAAAAAAADAA4AAAAIAAIAAAAEAAoAAAAHAAEAAAAEAAsAAAAHAAEAAAAEAAwAAAAHAAEAAAAEAA0AAAAHAAEAAAAEAA4AAAAHAAEAAAAFAAoAAAAHAAEAAAAFAAsAAAAHAAEAAAAFAAwAAAAHAAEAAAAFAA0AAAAHAAEAAAAFAA4AAAAHAAEAAAAGAAoAAAAGAAAAAAAGAAsAAAAGAAIAAAAGAAwAAAAHAAEAAAAGAA0AAAAHAAEAAAAGAA4AAAAHAAEAAAAHAAoAAAAHAAEAAAAHAAsAAAAHAAIAAAAHAAwAAAAHAAEAAAAHAA0AAAAHAAEAAAAHAA4AAAAHAAEAAAAIAAoAAAAHAAEAAAAIAAsAAAAHAAIAAAAIAAwAAAAHAAEAAAAIAA0AAAAHAAEAAAAIAA4AAAAHAAEAAAAJAAoAAAAIAAAAAAAJAAsAAAAIAAIAAAAJAAwAAAAHAAEAAAAJAA0AAAAHAAEAAAAJAA4AAAAHAAEAAAAKAAoAAAAHAAEAAAAKAAsAAAAHAAEAAAAKAAwAAAAHAAEAAAAKAA0AAAAHAAEAAAAKAA4AAAAHAAEAAAALAAoAAAAHAAEAAAALAAsAAAAHAAEAAAALAAwAAAAHAAEAAAALAA0AAAAHAAEAAAALAA4AAAAHAAEAAAABAAkAAAAHAAEAAAACAAkAAAAHAAEAAAADAAkAAAAHAAEAAAAEAAkAAAAHAAEAAAAFAAkAAAAHAAEAAAAGAAkAAAAHAAEAAAAHAAkAAAAGAAEAAAAIAAkAAAAIAAEAAAAJAAkAAAAHAAEAAAAKAAkAAAAHAAEAAAALAAkAAAAHAAEAAAA=")
+tile_set = SubResource("TileSet_7ykc4")
+
+[node name="CrystalTileLayer" type="TileMapLayer" parent="."]
+z_index = 1
+tile_map_data = PackedByteArray("AAAHAAIAAAAAAAAAAAAOAAYAAAAAAAUAAAAUAAQAAAAAAAAAAAAjABEAAAAAAAoAAAACABEAAAAAAAAAAAAGABwAAAAAAAoAAAATABkAAAAAAAUAAAAWACkAAAAAAAUAAAAfAC0AAAAAAAoAAAAFAC4AAAAAAAoAAAAiACYAAAAAAAAAAAALACMAAAAAAAAAABAXAAkAAAAAAAUAAAAgAAMAAAAAAAoAAAAQAC4AAAAAAAUAAAA=")
+tile_set = SubResource("TileSet_jiuq5")
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+position = Vector2(0, 400)
+shape = SubResource("WorldBoundaryShape2D_18nlu")
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+position = Vector2(650, 400)
+shape = SubResource("WorldBoundaryShape2D_c1pb6")
+
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+position = Vector2(325, 0)
+shape = SubResource("WorldBoundaryShape2D_6wevv")
+
+[node name="BottomWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
+position = Vector2(325, 800)
+shape = SubResource("WorldBoundaryShape2D_e1cbu")
+
+[node name="SpawnLocations" type="Node" parent="." node_paths=PackedStringArray("spawn_location")]
+script = ExtResource("3_lui1t")
+spawn_location = NodePath("Cave")
+
+[node name="Cave" type="Node2D" parent="SpawnLocations"]
+position = Vector2(242, 54)
+
+[node name="Player" parent="." instance=ExtResource("4_6fm3r")]
+z_index = 3
+position = Vector2(14, 9)
+
+[node name="Dialogue" parent="Player" instance=ExtResource("5_jiuq5")]
+unique_name_in_owner = true
+visible = false
+offset_left = -230.0
+offset_top = 129.0
+offset_right = 690.0
+offset_bottom = 129.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2.5, 2.5)
+
+[node name="InteractableObject" parent="." node_paths=PackedStringArray("interaction_area") instance=ExtResource("6_u6cyb")]
+z_index = 2
+position = Vector2(187, 643)
+dialogue_file = ExtResource("7_lxwcu")
+interaction_area = NodePath("Area2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObject"]
+position = Vector2(0, 16.499996)
+shape = SubResource("RectangleShape2D_gubc5")
+
+[node name="Sprite2D" type="Sprite2D" parent="InteractableObject"]
+position = Vector2(0, 17.5)
+scale = Vector2(0.1484375, 0.1328125)
+texture = ExtResource("8_f5qid")
+
+[node name="Area2D" type="Area2D" parent="InteractableObject"]
+position = Vector2(0, 19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableObject/Area2D"]
+shape = SubResource("RectangleShape2D_pu3yx")

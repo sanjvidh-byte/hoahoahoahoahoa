@@ -79,7 +79,6 @@ func hide_interaction_popup(body: Node2D) -> void:
 
 
 func start_interaction() -> void:
-	print("Start!")
 	player_node.disable_movement()
 	
 	var dialogue: Dialogue = player_node.get_dialogue_node()
